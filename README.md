@@ -1,2 +1,2 @@
-# DerDP-Technicolor_CGA2121_restart_scipt
+Technicolor CGA2121 restart script
 Python script that can be used to automate TECHNICOLOR CGA2121 reboots.
