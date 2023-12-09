@@ -4,9 +4,11 @@ import requests
 
 cookies = MozillaCookieJar()
 
+url = '<URL>'
+
 login_data = {
-    'username_login': '<username>',
-    'password_login': '<password>',
+    'username_login': '<USERNAME>',
+    'password_login': '<PASSWORD>',
     'language_selector': 'en'
 }
 
@@ -18,12 +20,12 @@ headers = {
 
 with requests.Session() as session:
     session.cookies = cookies
-    response = session.post('http://192.168.1.1/goform/logon', data=login_data, cookies=cookies)
+    response = session.post(url+'/goform/logon', data=login_data, cookies=cookies)
 
 print(cookies)
 # Using a cookie, load the restart page to obtain token
 
-restart_page = requests.get('http://192.168.1.1/ad_restart_gateway.html', cookies=cookies)
+restart_page = requests.get(url+'/ad_restart_gateway.html', cookies=cookies)
 
 token = soup(restart_page.text, 'html.parser').select_one('input')['value']
 token = "csrftoken="+token
@@ -31,9 +33,9 @@ token = "csrftoken="+token
 
 
 # Send data to a ad_restart_gateway form using the token generated before
-git reset --hard
+
 restart_data = token+"&tch_devicerestart=0x00"
 
-restart = requests.post('http://192.168.1.1/goform/ad_restart_gateway', cookies=cookies, headers=headers, data=restart_data.encode())
+restart = requests.post(url+'/goform/ad_restart_gateway', cookies=cookies, headers=headers, data=restart_data.encode())
 
 print(restart.text)
