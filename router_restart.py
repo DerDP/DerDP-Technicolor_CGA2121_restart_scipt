@@ -32,7 +32,7 @@ token = "csrftoken="+token
 
 
 
-# Send data to a ad_restart_gateway form using the token generated before
+# Send data to the ad_restart_gateway form using the token generated before
 
 restart_data = token+"&tch_devicerestart=0x00"
 
